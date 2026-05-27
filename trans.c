@@ -21,6 +21,8 @@ void textFile(FILE *readPtr);
 void updateRecord(FILE *fPtr);
 void newRecord(FILE *fPtr);
 void deleteRecord(FILE *fPtr);
+void listAccounts(FILE *fPtr);
+void generateAccountsFile(FILE *fPtr);
 
 int main(int argc, char *argv[])
 {
