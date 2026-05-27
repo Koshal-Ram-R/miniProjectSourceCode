@@ -9,7 +9,10 @@ struct clientData
     unsigned int acctNum; // account number
     char lastName[15];    // account last name
     char firstName[10];   // account first name
-    double balance;       // account balance
+    double balance; // account balance
+    char mobile[15];
+    char accountType[20];
+    int transactionCount;
 };                        // end structure clientData
 
 // prototypes
