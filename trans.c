@@ -79,7 +79,7 @@ void textFile(FILE *readPtr)
     FILE *writePtr; // accounts.txt file pointer
     int result;     // used to test whether fread read any bytes
     // create clientData with default information
-    struct clientData client = {0, "", "", 0.0};
+    struct clientData client = {0, "", "", 0.0, "", "", 0};
 
     // fopen opens the file; exits if file cannot be opened
     if ((writePtr = fopen("accounts.txt", "w")) == NULL)
@@ -127,7 +127,7 @@ void updateRecord(FILE *fPtr)
     unsigned int account; // account number
     double transaction;   // transaction amount
     // create clientData with no information
-    struct clientData client = {0, "", "", 0.0};
+    struct clientData client = {0, "", "", 0.0, "", "", 0};
 
     // obtain number of account to update
     printf("%s", "Enter account to update ( 1 - 100 ): ");
@@ -198,7 +198,7 @@ void deleteRecord(FILE *fPtr)
 
 void listAccounts(FILE *fPtr)
 {
-    struct clientData client = {0, "", "", 0.0};
+    struct clientData client = {0, "", "", 0.0, "", "", 0};
 
     rewind(fPtr);
 
@@ -222,7 +222,7 @@ void generateAccountsFile(FILE *fPtr)
 {
     FILE *fp;
 
-    struct clientData client = {0, "", "", 0.0};
+    struct clientData client = {0, "", "", 0.0, "", "", 0};
 
     fp = fopen("accounts.txt", "w");
 
@@ -266,12 +266,12 @@ void generateAccountsFile(FILE *fPtr)
 void newRecord(FILE *fPtr)
 {
     // create clientData with default information
-    struct clientData client = {0, "", "", 0.0};
+    struct clientData client = {0, "", "", 0.0, "", "", 0};
     unsigned int accountNum; // account number
 
     // obtain number of account to create
     printf("%s", "Enter new account number ( 1 - 100 ): ");
-    scanf("%d", &accountNum);
+    scanf("%u", &accountNum);
 
     // move file pointer to correct record in file
     fseek(fPtr, (accountNum - 1) * sizeof(struct clientData), SEEK_SET);
