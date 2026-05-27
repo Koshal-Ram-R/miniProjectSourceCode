@@ -89,7 +89,14 @@ void textFile(FILE *readPtr)
     else
     {
         rewind(readPtr); // sets pointer to beginning of file
-        fprintf(writePtr, "%-6s%-16s%-11s%10s\n", "Acct", "Last Name", "First Name", "Balance");
+        fprintf(writePtr,
+            "%-6s%-16s%-11s%-15s%-15s%s\n",
+            "Acct",
+            "Last Name",
+            "First Name",
+            "Mobile",
+            "Type",
+            "Balance");
 
         // copy all records from random-access file into text file
         while (!feof(readPtr))
@@ -99,8 +106,14 @@ void textFile(FILE *readPtr)
             // write single record to text file
             if (result != 0 && client.acctNum != 0)
             {
-                fprintf(writePtr, "%-6d%-16s%-11s%10.2f\n", client.acctNum, client.lastName, client.firstName,
-                        client.balance);
+                fprintf(writePtr,
+                    "%-6d%-16s%-11s%-15s%-15s%.2f\n",
+                    client.acctNum,
+                    client.lastName,
+                    client.firstName,
+                    client.mobile,
+                    client.accountType,
+                    client.balance);
             } // end if
         }     // end while
 
@@ -118,7 +131,7 @@ void updateRecord(FILE *fPtr)
 
     // obtain number of account to update
     printf("%s", "Enter account to update ( 1 - 100 ): ");
-    scanf("%d", &account);
+    scanf("%u", &account);
 
     // move file pointer to correct record in file
     fseek(fPtr, (account - 1) * sizeof(struct clientData), SEEK_SET);
@@ -157,12 +170,12 @@ void updateRecord(FILE *fPtr)
 void deleteRecord(FILE *fPtr)
 {
     struct clientData client;                       // stores record read from file
-    struct clientData blankClient = {0, "", "", 0}; // blank client
+    struct clientData blankClient = {0, "", "", 0.0, "", "", 0}; // blank client
     unsigned int accountNum;                        // account number
 
     // obtain number of account to delete
     printf("%s", "Enter account number to delete ( 1 - 100 ): ");
-    scanf("%d", &accountNum);
+    scanf("%u", &accountNum);
 
     // move file pointer to correct record in file
     fseek(fPtr, (accountNum - 1) * sizeof(struct clientData), SEEK_SET);
